@@ -15,4 +15,5 @@ The main aim of the project is to procedurally generate puesdo-random rooms(dung
 5: In a new browser window, open http://127.0.0.1:5000/.  
 6: And Voila! Your Dungeon Generator is ready. Click Submit and enjoy the animation!!
 
-![image](https://github.com/sumedha-98/Dungeons/assets/67063451/c7c17f5e-4f86-46b2-b600-5b4926810755)
+![image](https://github.com/sumedha-98/Dungeons/assets/67063451/95f2da28-ba41-4d99-9479-1ac9d4514781)
+
