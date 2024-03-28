@@ -36,7 +36,11 @@ class DungeonGenerator:
                 if any(room_overlap(x, y, room_width, room_height, rx, ry, rw, rh) for rx, ry, rw, rh in rooms):
                     continue  # Skip this room if it overlaps
             # Create room in dungeon grid
-            self.dungeon[y:y+room_height, x:x+room_width] = 1
+            self.dungeon[y:y+room_height, x:x+room_width] = 2
+            self.dungeon[y, x:x+room_width] = 1
+            self.dungeon[y+room_height-1, x:x+room_width] = 1
+            self.dungeon[y:y+room_height, x] = 1
+            self.dungeon[y:y+room_height, x+room_width-1] = 1
             # Append current state of dungeon to frames
             frames.append(self.dungeon.copy())
             rooms.append((x, y, room_width, room_height))
@@ -44,7 +48,7 @@ class DungeonGenerator:
 
 def room_overlap(x1, y1, w1, h1, x2, y2, w2, h2):
     """Check if two rooms overlap."""
-    return (x1 < x2 + w2 and x1 + w1 > x2 and y1 < y2 + h2 and y1 + h1 > y2)
+    return x1 < x2 + w2 and x1 + w1 > x2 and y1 < y2 + h2 and y1 + h1 > y2
 
 @app.route('/')
 def index():
@@ -81,7 +85,7 @@ def process_input():
         elif height <= 0:
             raise ValueError("Height should be greater than 0")
         generator = DungeonGenerator(width, height, num_rooms, max_room_width, min_room_width, max_room_height, min_room_height, overlap)
-    except ValueError as e:
+    except Exception as e:
         return str(e)
     frames = generator.generate_dungeon()
     gif_filename = 'dungeon_generation.gif'
@@ -94,9 +98,9 @@ def save_animation(frames, gif_filename):
     filenames = []
     for i, frame in enumerate(frames):
         filename = f'static/frame_{i}.png'
-        plt.imsave(filename, frame, cmap='gray')
+        plt.imsave(filename, frame, cmap='YlGn')
         filenames.append(filename)
-    with imageio.get_writer(f'static/{gif_filename}', mode='I', duration=2.0) as writer:
+    with imageio.get_writer(f'static/{gif_filename}', mode='I', duration=4.0) as writer:
         for filename in filenames:
             image = imageio.imread(filename)
             writer.append_data(image)
