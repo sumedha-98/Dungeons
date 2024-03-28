@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Input</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index_styles.css') }}">
+</head>
+<body>
+    <h1>Welcome to the dungeon</h1>
+    <form action="{{ url_for('process_input') }}" method="POST">
+        <label for="width">Enter the dungeon grid width</label>
+        <input type="number" name="user_input_width" value="50" min="10">
+        <label for="height">Enter the dungeon grid height</label>
+        <input type="number" name="user_input_height" value="60" min="20">
+        <label for="num_rooms">Enter the number of num_rooms</label>
+        <input type="number" name="user_input_num_rooms" value="25" min="1">
+        <label for="max_width">Enter the max width for each room</label>
+        <input type="number" name="user_input_max_width" value="10" min="1" oninput="updateRangeValue(this)">
+        <script>
+            function updateRangeValue(input) {
+                var user_input_width = document.querySelector('input[name="user_input_width"]').value;
+                var max_width_input = document.querySelector('input[name="user_input_max_width"]');
+                max_width_input.value = Math.min(input.value, user_input_width);
+            }
+        </script>
+        <label for="min_width">Enter the min width for each room</label>
+        <input type="number" name="user_input_min_width" value="2" min="1">
+        <label for="max_height">Enter the max height for each room</label>
+        <input type="number" name="user_input_max_height" value="15" min="1" oninput="updateHeightRangeValue(this)">
+        <script>
+            function updateHeightRangeValue(input) {
+                var user_input_height = document.querySelector('input[name="user_input_height"]').value;
+                var max_height_input = document.querySelector('input[name="user_input_max_height"]');
+                max_height_input.value = Math.min(input.value, user_input_height);
+            }
+        </script>
+        <label for="min_height">Enter the min height for each room</label>
+        <input type="number" name="user_input_min_height" value="4" min="1">
+        
+        <label for="room_overlap">Do you want the rooms to overlap? </label>
+        <div>
+        <input type="radio" name="yes_no" checked value="yes">Yes</input>
+        </div>
+        <div>
+        <input type="radio" name = "yes_no" value="no">No</input>
+        </div>
+        <p>
+        <button type="submit">Submit</button>
+        </p>
+    </form>
+</body>
+</html>
