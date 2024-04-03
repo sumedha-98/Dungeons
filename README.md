@@ -2,7 +2,8 @@ This project focuses on procedurally generating Dungeons. This project is coded 
 ## Requirements <br />
 Make sure to install python and pip on your system in order to run the project locally. <br />
 The library requirements for running the code are given in requirements.txt under the main branch. Download the requirements.txt file and run the following command to install all requirements. <br />
-  `pip install -r /path/to/requirements.txt` 
+  `pip install -U -r requirements.txt`   
+  (This command needs to be run in the directory where requirements.txt is located)
 
 ## About the project: <br />
 The main aim of the project is to procedurally generate puesdo-random rooms(dungeons) in a given 2-D layout. It makes use of the concepts of procedural generations which is a commonly used in 2-D games like minescraft and Dungeons and Dragons.
